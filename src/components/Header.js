@@ -6,8 +6,8 @@ class Header extends Component{
     this.state={
       renderPart: 'default',
       personalImg: faceImage,
-      name: "First Name Last Name",
-      currentJob: "Current Job",
+      name: "HOWARD AUSTIN",
+      currentJob: "Graphic Designer",
     }
     this.handleChange=this.handleChange.bind(this);
     this.handleClick=this.handleClick.bind(this);
@@ -26,30 +26,36 @@ class Header extends Component{
     const renderMap = {
       name: (
         <form>
-          <label id='personalImg' onClick={this.handleClick}>
-            <input type="file" accept="image/jpeg, image/png, image/gif, image/svg+xml" onChange={this.handleImageChange} />
-            <img alt='Your Face' src={this.state.personalImg}/>
-          </label>
+          <span id='personalImg'>
+            <label>
+              <input type="file" accept="image/jpeg, image/png, image/gif, image/svg+xml" onChange={this.handleImageChange} />
+              <img alt='Your Face' src={this.state.personalImg} />
+            </label>
+          </span>
           <input type='text' id='name' value={this.state.name} onChange={this.handleChange} onKeyDown={this.handleEnter}/>
           <span id='currentJob' onClick={this.handleClick}>{this.state.currentJob}</span>
         </form>
       ),
       currentJob: (
         <form>
-          <label id='personalImg' onClick={this.handleClick}>
-            <input type="file" accept="image/jpeg, image/png, image/gif, image/svg+xml" onChange={this.handleImageChange} />
-            <img alt='Your Face' src={this.state.personalImg}/>
-          </label>
+          <span id='personalImg'>
+            <label>
+              <input type="file" accept="image/jpeg, image/png, image/gif, image/svg+xml" onChange={this.handleImageChange} />
+              <img alt='Your Face' src={this.state.personalImg} />
+            </label>
+          </span>
           <span id='name' onClick={this.handleClick}>{this.state.name}</span>
           <input type='text' id='currentJob' value={this.state.currentJob} onChange={this.handleChange} onKeyDown={this.handleEnter}/>
         </form>
       ),
       default: (
         <form>
-          <label id='personalImg' onClick={this.handleClick}>
-            <input type="file" accept="image/jpeg, image/png, image/gif, image/svg+xml" onChange={this.handleImageChange} />
-            <img alt='Your Face' src={this.state.personalImg}/>
-          </label>
+          <span id='personalImg'>
+            <label>
+              <input type="file" accept="image/jpeg, image/png, image/gif, image/svg+xml" onChange={this.handleImageChange} />
+              <img alt='Your Face' src={this.state.personalImg} />
+            </label>
+          </span>
           <span id='name' onClick={this.handleClick}>{this.state.name}</span>
           <span id='currentJob' onClick={this.handleClick}>{this.state.currentJob}</span>
         </form>
@@ -83,7 +89,7 @@ class Header extends Component{
     let renderMap=this.renderMapObject();
     let form=renderMap[renderPart] || renderMap.default;
     return (
-      <div className='headerChild'>
+      <div className='header'>
         {form}
       </div>
     ); 
