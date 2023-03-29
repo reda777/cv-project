@@ -14,54 +14,13 @@ class Header extends Component{
     this.handleEnter=this.handleEnter.bind(this);
     this.handleImageChange=this.handleImageChange.bind(this);
   }
-  handleChange(event) {
-    const target = event.target;
+  handleChange(e) {
+    const target = e.target;
     const value = target.value;
     const id = target.id;
     this.setState({
       [id]: value,
     });
-  }
-  renderMapObject(){
-    const renderMap = {
-      name: (
-        <form>
-          <span id='personalImg'>
-            <label>
-              <input type="file" accept="image/jpeg, image/png, image/gif, image/svg+xml" onChange={this.handleImageChange} />
-              <img alt='Your Face' src={this.state.personalImg} />
-            </label>
-          </span>
-          <input type='text' id='name' value={this.state.name} onChange={this.handleChange} onKeyDown={this.handleEnter}/>
-          <span id='currentJob' onClick={this.handleClick}>{this.state.currentJob}</span>
-        </form>
-      ),
-      currentJob: (
-        <form>
-          <span id='personalImg'>
-            <label>
-              <input type="file" accept="image/jpeg, image/png, image/gif, image/svg+xml" onChange={this.handleImageChange} />
-              <img alt='Your Face' src={this.state.personalImg} />
-            </label>
-          </span>
-          <span id='name' onClick={this.handleClick}>{this.state.name}</span>
-          <input type='text' id='currentJob' value={this.state.currentJob} onChange={this.handleChange} onKeyDown={this.handleEnter}/>
-        </form>
-      ),
-      default: (
-        <form>
-          <span id='personalImg'>
-            <label>
-              <input type="file" accept="image/jpeg, image/png, image/gif, image/svg+xml" onChange={this.handleImageChange} />
-              <img alt='Your Face' src={this.state.personalImg} />
-            </label>
-          </span>
-          <span id='name' onClick={this.handleClick}>{this.state.name}</span>
-          <span id='currentJob' onClick={this.handleClick}>{this.state.currentJob}</span>
-        </form>
-      )
-    };
-    return renderMap;
   }
   handleEnter(e){
     if(e.key==="Enter"){
@@ -73,8 +32,8 @@ class Header extends Component{
       renderPart: e.target.id,
     });
   }
-  handleImageChange(event){
-    const selectedFile = event.target.files[0];
+  handleImageChange(e){
+    const selectedFile = e.target.files[0];
     if (selectedFile && selectedFile.type.startsWith('image/')) {
       const imageUrl = URL.createObjectURL(selectedFile);
       this.setState({
@@ -84,13 +43,41 @@ class Header extends Component{
       console.log("wrong file type");
     }
   }
-  render(){
+  renderCurrentJob(){
     const renderPart=this.state.renderPart;
-    let renderMap=this.renderMapObject();
-    let form=renderMap[renderPart] || renderMap.default;
+    let currentJobSpan=(renderPart==='currentJob')?
+                  (<input type='text' id='currentJob' value={this.state.currentJob} onChange={this.handleChange} onKeyDown={this.handleEnter}/>):
+                  (<span id='currentJob' onClick={this.handleClick}>{this.state.currentJob}</span>);
+    return currentJobSpan;
+  }
+  renderName(){
+    const renderPart=this.state.renderPart;
+    let nameSpan=(renderPart==='name')?
+                  (<input type='text' id='name' value={this.state.name} onChange={this.handleChange} onKeyDown={this.handleEnter}/>):
+                  (<span id='name' onClick={this.handleClick}>{this.state.name}</span>);
+    return nameSpan;
+  }
+  renderPersonalImg(){
+    return (
+      <span id='personalImg'>
+        <label>
+          <input type="file" accept="image/jpeg, image/png, image/gif, image/svg+xml" onChange={this.handleImageChange} />
+          <img alt='Your Face' src={this.state.personalImg} />
+        </label>
+      </span>
+    );
+  }
+  render(){
+    const personalImg=this.renderPersonalImg();
+    const name=this.renderName();
+    const currentJob=this.renderCurrentJob();
     return (
       <div className='header'>
-        {form}
+        <form>
+          {personalImg}
+          {name}
+          {currentJob}
+        </form>
       </div>
     ); 
   }
