@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import Header from './components/Header';
+import Experience from './components/Experience';
 class App extends Component{
   render(){
     return (
     <div className='main'>
       <Header />
-      <div className='experience'>
-        
-      </div>
+      <Experience />
       <div className='education'>
         
       </div>
