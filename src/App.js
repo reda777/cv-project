@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import Header from './components/Header';
 import Experience from './components/Experience';
 import Education from './components/Education';
+import Contact from './components/Contact';
+import Skills from './components/Skills';
 class App extends Component{
   render(){
     return (
@@ -9,12 +11,8 @@ class App extends Component{
       <Header />
       <Experience />
       <Education />
-      <div className='contact'>
-
-      </div>
-      <div className='skills'>
-        
-      </div>
+      <Contact />
+      <Skills />
     </div>
     ); 
   }

@@ -264,3 +264,72 @@ body {
     margin-right: 5px;
 }
 /*** Education ***/
+/*** Contact ***/
+.contact{
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 13px;
+    padding-right: 5px;
+    color: var(--main-font-color);
+    width: calc(50% - 5px);
+}
+.contact .title{
+    background-color: var(--title-bg-color);
+    font-size: 22px;
+    box-sizing: border-box;
+    width: 100%;
+    height: calc(27px + 10px);
+    padding: 5px 5px 5px 20px;
+}
+.contact .rows{
+    padding: 15px 20px 0 20px;
+    display: grid;
+    grid-template-columns: 257px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.contact svg{
+    display: inline-block;
+    width: 12px;
+}
+.contact svg path{
+    fill: var(--main-font-color);
+}
+.contact .svg{
+    padding: 2px 13px 0 5px;
+}
+.contact .row{
+    display: flex;
+    font-size: 14px;
+    padding: 2px 5px;
+}
+.contact input[type="text"] {
+    font-family: var(--header-font);
+    width: auto;
+    height: fit-content;
+    margin-right: 5px;
+}
+/*** Skills ***/
+.skills{
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 13px;
+    padding-left: 5px;
+    color: var(--main-font-color);
+    width: calc(50% - 5px);
+}
+.skills .title{
+    background-color: var(--title-bg-color);
+    font-size: 22px;
+    box-sizing: border-box;
+    width: 100%;
+    height: calc(27px + 10px);
+    padding: 5px 5px 5px 20px;
+}
+/*** Skills ***/
