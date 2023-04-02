@@ -172,3 +172,95 @@ body {
     margin-right: 5px;
 }
 /*** Experience ***/
+/*** Education ***/
+.education{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 13px;
+    color: var(--main-font-color);
+}
+.education .title{
+    display: grid;
+    grid-template-columns: 1fr 50px;
+    background-color: var(--title-bg-color);
+    font-size: 22px;
+    box-sizing: border-box;
+    width: 100%;
+    height: calc(27px + 10px);
+    padding: 5px 5px 5px 20px;
+}
+.education .addExp{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.education .addExp svg{
+    display: inline-block;
+    width: 22px;
+    cursor: pointer;
+}
+.education .addExp svg path,
+.education .square svg path{
+    fill: var(--main-font-color);
+}
+.education .rows{
+    padding: 15px 20px 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.education .educationRow{
+    height: calc(60px + 5px);
+    display: grid;
+    grid-template-columns: 30px calc((555px - 30px - 20px) / 2) calc((555px + 20px - 30px) / 2);
+    grid-template-rows: 20px 40px;
+    padding: 5px 0 0 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+.education .square{
+    grid-row: 1/3;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 10px;
+}
+.education .square svg{
+    display: inline-block;
+    width: 11px;
+}
+.education .degreeName{
+    padding: 5px 5px;
+    font-weight: 600;
+}
+.education .degreeYear{
+    font-size: 14px;
+    padding: 0 5px;
+}
+.education .degreeSchool{
+    font-weight: 600;
+    padding: 0 5px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+}
+.education .degreeDesc{
+    font-size: 12px;
+    padding: 0 5px;
+    line-height: normal;
+    overflow: hidden;
+}
+.education input[type="text"] {
+    font-family: var(--header-font);
+    width: auto;
+    height: fit-content;
+    margin-right: 5px;
+}
+.education textarea {
+    font-family: var(--header-font);
+    width: 279px;
+    height: 52px;
+    margin-right: 5px;
+}
+/*** Education ***/
