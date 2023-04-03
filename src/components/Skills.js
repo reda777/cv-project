@@ -1,72 +1,92 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 class Skills extends Component{
   constructor(){
     super();
     this.state={
-        renderPart: 'default',
-        address: '308 Negra Arroyo Lane, Albuquerque, New Mexico. 87104.',
-        phone: '212-612345678',
-        email: 'email-name@email.com',
-        website: 'website.com',
-    }
+      renderId: 0,
+      renderPart: 'default',
+      rows: [{id:0, skillName: 'skill', skillRange: 5 }]
+    };
     this.handleClick=this.handleClick.bind(this);
     this.handleChange=this.handleChange.bind(this);
     this.handleEnter=this.handleEnter.bind(this);
+    this.handleAdd=this.handleAdd.bind(this);
   }
-  handleChange(e) {
-    const target = e.target;
-    const value = target.value;
-    const id = target.id;
-    this.setState({
-      [id]: value,
-    });
+  handleAdd(){
+    if(this.state.rows.length<6){
+      this.setState((state) => ({
+        rows: state.rows.concat({ id: state.rows.length, skillName: 'skill', skillRange: 5 })
+      }));
+    }
+  }
+  handleChange(e){
+    const value=e.target.value;
+    const prop=e.target.id;
+    const idToUpdate=e.target.parentNode.getAttribute("data-id");
+    this.setState(prevState => ({
+      rows: prevState.rows.map(row => {
+        if (row.id === parseInt(idToUpdate)) {
+          return {
+            ...row,
+            [prop]: value
+          };
+        }
+        return row;
+      })
+    }));
   }
   handleEnter(e){
     if(e.key==="Enter"){
-      this.setState({renderPart: 0,})
+      this.setState({renderPart: 'default',})
     }
   }
   handleClick(e){
+    console.log(e.target.className);
     this.setState({
-      renderPart: e.target.id,
+      renderId: parseInt(e.target.parentNode.dataset.id),
+      renderPart: e.target.classList[0],
     });
   }
-  renderAddress(){
+  renderSkillName(id){
     const renderPart=this.state.renderPart;
-    let currentJobSpan=(renderPart==='address')?
-                  (<input type='text' id='address' value={this.state.address} onChange={this.handleChange} onKeyDown={this.handleEnter}/>):
-                  (<span id='address' onClick={this.handleClick}>{this.state.address}</span>);
-    return currentJobSpan;
+    const renderId=this.state.renderId;
+    let skillNameDiv=(renderPart==='skillName' && renderId===id)?
+                  (<input type='text' id='skillName' value={this.state.rows[id].skillName} onChange={this.handleChange} onKeyDown={this.handleEnter}/>):
+                  (<div className='skillName' onClick={this.handleClick}>{this.state.rows[id].skillName}</div>);
+    return skillNameDiv;
   }
-  renderPhone(){
+  renderSkillRange(id){
     const renderPart=this.state.renderPart;
-    let currentJobSpan=(renderPart==='phone')?
-                  (<input type='text' id='phone' value={this.state.phone} onChange={this.handleChange} onKeyDown={this.handleEnter}/>):
-                  (<span id='phone' onClick={this.handleClick}>{this.state.phone}</span>);
-    return currentJobSpan;
+    const renderId=this.state.renderId;
+    let skillRangeDiv=(renderPart==='skillRange' && renderId===id)?
+                  (<input type="range" min="1" max="10" name="skillRange" id='skillRange' value={this.state.rows[id].skillRange} onChange={this.handleChange} onKeyDown={this.handleEnter}/>):
+                  (<div data-id={id} className='skillRange' onClick={this.handleClick} ><div className='skillRange insideSkillRange' style={{width:7 * this.state.rows[id].skillRange+'px'}}></div></div>);
+    return skillRangeDiv;
   }
-  renderEmail(){
-    const renderPart=this.state.renderPart;
-    let currentJobSpan=(renderPart==='email')?
-                  (<input type='text' id='email' value={this.state.email} onChange={this.handleChange} onKeyDown={this.handleEnter}/>):
-                  (<span id='email' onClick={this.handleClick}>{this.state.email}</span>);
-    return currentJobSpan;
-  }
-  renderWebsite(){
-    const renderPart=this.state.renderPart;
-    let currentJobSpan=(renderPart==='website')?
-                  (<input type='text' id='website' value={this.state.website} onChange={this.handleChange} onKeyDown={this.handleEnter}/>):
-                  (<span id='website' onClick={this.handleClick}>{this.state.website}</span>);
-    return currentJobSpan;
+  renderRows(){
+    return this.state.rows.map((row,index)=>{
+      return (
+        <div className='skillsRow' data-id={index} key={index}>
+          {this.renderSkillName(index)}
+          {this.renderSkillRange(index)}
+        </div>
+      );
+    })
   }
   render(){
+    let rows=this.renderRows();
     return (
       <div className='skills'>
         <div className='title'>
           <div className='titleText'>SKILLS</div>
+          <div className='addExp'>
+            <svg  onClick={this.handleAdd} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path fillRule="evenodd" d="M12 4a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2h-6v6a1 1 0 1 1-2 0v-6H5a1 1 0 1 1 0-2h6V5a1 1 0 0 1 1-1Z" clipRule="evenodd"/>
+            </svg>
+          </div>
         </div>
         <div className='rows'>
-            
+          {rows}
         </div>
       </div>
     ); 

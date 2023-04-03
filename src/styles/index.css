@@ -331,5 +331,60 @@ body {
     width: 100%;
     height: calc(27px + 10px);
     padding: 5px 5px 5px 20px;
+    display: grid;
+    grid-template-columns: 1fr 50px;
+}
+.skills .addExp{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.skills .addExp svg{
+    display: inline-block;
+    width: 22px;
+    cursor: pointer;
+}
+.skills .addExp svg path,
+.skills .square svg path{
+    fill: var(--main-font-color);
+}
+.skills .rows{
+    padding: 15px 20px 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+}
+.skills .skillsRow{
+    display: flex;
+    align-items: center;
+    margin: 3px 0;
+    min-width: calc(252px / 2);
+}
+.skills .skillName{
+    font-weight: 200;
+    font-size: 13px;
+    padding-right: 5px;
+    min-width: calc(126px - 70px - 5px - 5px);
+}
+.skills .skillRange{
+    width: 70px;
+    height: 10px;
+    background-color: var(--title-bg-color);
+    margin-right: 5px;
+}
+.skills .insideSkillRange{
+    height: 10px;
+    background-color: var(--header-bg-color);
+}
+.skills input[type="text"] {
+    font-family: var(--header-font);
+    height: fit-content;
+    margin-right: 5px;
+    box-sizing: border-box;
+}
+.skills input[type="range"] {
+    width: 70px;
 }
 /*** Skills ***/
