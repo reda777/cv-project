@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 class Education extends Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state={
-      renderId: 0,
-      renderPart: 'default',
       rows: [{
         id: 0,
         degreeName: 'Degree Name',
@@ -14,9 +12,9 @@ class Education extends Component{
       }],
     }
     this.handleAdd=this.handleAdd.bind(this);
-    this.handleClick=this.handleClick.bind(this);
+    this.handleClick=this.props.handleClick;
     this.handleChange=this.handleChange.bind(this);
-    this.handleEnter=this.handleEnter.bind(this);
+    this.handleEnter=this.props.handleEnter;
   }
   handleChange(e){
     const value=e.target.value;
@@ -34,17 +32,6 @@ class Education extends Component{
       })
     }));
   }
-  handleEnter(e){
-    if(e.key==="Enter"){
-      this.setState({renderPart: 'default',})
-    }
-  }
-  handleClick(e){
-    this.setState({
-      renderId: parseInt(e.target.parentNode.dataset.id),
-      renderPart: e.target.className,
-    });
-  }
   handleAdd(){
     if(this.state.rows.length<3){
       this.setState((state) => ({
@@ -59,32 +46,32 @@ class Education extends Component{
     }
   }
   renderDegreeName(id){
-    const renderPart=this.state.renderPart;
-    const renderId=this.state.renderId;
+    const renderPart=this.props.renderPart;
+    const renderId=this.props.renderId;
     let degreeNameDiv=(renderPart==='degreeName' && renderId===id)?
                   (<input type='text' id='degreeName' value={this.state.rows[id].degreeName} onChange={this.handleChange} onKeyDown={this.handleEnter}/>):
                   (<div className='degreeName' onClick={this.handleClick}>{this.state.rows[id].degreeName}</div>);
     return degreeNameDiv;
   }
   renderDegreeYear(id){
-    const renderPart=this.state.renderPart;
-    const renderId=this.state.renderId;
+    const renderPart=this.props.renderPart;
+    const renderId=this.props.renderId;
     let degreeYearDiv=(renderPart==='degreeYear' && renderId===id)?
                   (<input type='text' id='degreeYear' value={this.state.rows[id].degreeYear} onChange={this.handleChange} onKeyDown={this.handleEnter}/>):
                   (<div className='degreeYear' onClick={this.handleClick}>{this.state.rows[id].degreeYear}</div>);
     return degreeYearDiv;
   } 
   renderDegreeSchool(id){
-    const renderPart=this.state.renderPart;
-    const renderId=this.state.renderId;
+    const renderPart=this.props.renderPart;
+    const renderId=this.props.renderId;
     let degreeSchoolDiv=(renderPart==='degreeSchool' && renderId===id)?
                   (<input type='text' id='degreeSchool' value={this.state.rows[id].degreeSchool} onChange={this.handleChange} onKeyDown={this.handleEnter}/>):
                   (<div className='degreeSchool' onClick={this.handleClick}>{this.state.rows[id].degreeSchool}</div>);
     return degreeSchoolDiv;
   }
   renderDegreeDesc(id){
-    const renderPart=this.state.renderPart;
-    const renderId=this.state.renderId;
+    const renderPart=this.props.renderPart;
+    const renderId=this.props.renderId;
     let degreeDescDiv=(renderPart==='degreeDesc' && renderId===id)?
                   (<textarea type='text' id='degreeDesc' value={this.state.rows[id].degreeDesc} onChange={this.handleChange} onKeyDown={this.handleEnter}/>):
                   (<div className='degreeDesc' onClick={this.handleClick}>{this.state.rows[id].degreeDesc}</div>);

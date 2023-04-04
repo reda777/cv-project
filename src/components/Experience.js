@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 class Experience extends Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state={
-      renderId: 0,
-      renderPart: 'default',
       rows: [{
         id: 0,
         jobTitle: 'Job Title',
@@ -14,9 +12,9 @@ class Experience extends Component{
       }],
     }
     this.handleAdd=this.handleAdd.bind(this);
-    this.handleClick=this.handleClick.bind(this);
+    this.handleClick=this.props.handleClick;
     this.handleChange=this.handleChange.bind(this);
-    this.handleEnter=this.handleEnter.bind(this);
+    this.handleEnter=this.props.handleEnter;
   }
   handleChange(e){
     const value=e.target.value;
@@ -34,17 +32,7 @@ class Experience extends Component{
       })
     }));
   }
-  handleEnter(e){
-    if(e.key==="Enter"){
-      this.setState({renderPart: 'default',})
-    }
-  }
-  handleClick(e){
-    this.setState({
-      renderId: parseInt(e.target.parentNode.dataset.id),
-      renderPart: e.target.className,
-    });
-  }
+  
   handleAdd(){
     if(this.state.rows.length<3){
       this.setState((state) => ({
@@ -59,32 +47,32 @@ class Experience extends Component{
     }
   }
   renderJobTitle(id){
-    const renderPart=this.state.renderPart;
-    const renderId=this.state.renderId;
+    const renderPart=this.props.renderPart;
+    const renderId=this.props.renderId;
     let jobTitleDiv=(renderPart==='jobTitle' && renderId===id)?
                   (<input type='text' id='jobTitle' value={this.state.rows[id].jobTitle} onChange={this.handleChange} onKeyDown={this.handleEnter}/>):
                   (<div className='jobTitle' onClick={this.handleClick}>{this.state.rows[id].jobTitle}</div>);
     return jobTitleDiv;
   }
   renderJobYears(id){
-    const renderPart=this.state.renderPart;
-    const renderId=this.state.renderId;
+    const renderPart=this.props.renderPart;
+    const renderId=this.props.renderId;
     let jobYearsDiv=(renderPart==='jobYears' && renderId===id)?
                   (<input type='text' id='jobYears' value={this.state.rows[id].jobYears} onChange={this.handleChange} onKeyDown={this.handleEnter}/>):
                   (<div className='jobYears' onClick={this.handleClick}>{this.state.rows[id].jobYears}</div>);
     return jobYearsDiv;
   } 
   renderJobCompany(id){
-    const renderPart=this.state.renderPart;
-    const renderId=this.state.renderId;
+    const renderPart=this.props.renderPart;
+    const renderId=this.props.renderId;
     let jobCompanyDiv=(renderPart==='jobCompany' && renderId===id)?
                   (<input type='text' id='jobCompany' value={this.state.rows[id].jobCompany} onChange={this.handleChange} onKeyDown={this.handleEnter}/>):
                   (<div className='jobCompany' onClick={this.handleClick}>{this.state.rows[id].jobCompany}</div>);
     return jobCompanyDiv;
   }
   renderJobDesc(id){
-    const renderPart=this.state.renderPart;
-    const renderId=this.state.renderId;
+    const renderPart=this.props.renderPart;
+    const renderId=this.props.renderId;
     let jobDescDiv=(renderPart==='jobDesc' && renderId===id)?
                   (<textarea type='text' id='jobDesc' value={this.state.rows[id].jobDesc} onChange={this.handleChange} onKeyDown={this.handleEnter}/>):
                   (<div className='jobDesc' onClick={this.handleClick}>{this.state.rows[id].jobDesc}</div>);

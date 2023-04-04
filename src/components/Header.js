@@ -1,17 +1,16 @@
 import React, {Component} from 'react';
 import faceImage from '../images/image1.jpg';
 class Header extends Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state={
-      renderPart: 'default',
       personalImg: faceImage,
       name: "HOWARD AUSTIN",
       currentJob: "Graphic Designer",
     }
     this.handleChange=this.handleChange.bind(this);
-    this.handleClick=this.handleClick.bind(this);
-    this.handleEnter=this.handleEnter.bind(this);
+    this.handleClick=this.props.handleClick;
+    this.handleEnter=this.props.handleEnter;
     this.handleImageChange=this.handleImageChange.bind(this);
   }
   handleChange(e) {
@@ -20,16 +19,6 @@ class Header extends Component{
     const id = target.id;
     this.setState({
       [id]: value,
-    });
-  }
-  handleEnter(e){
-    if(e.key==="Enter"){
-      this.setState({renderPart: 0,})
-    }
-  }
-  handleClick(e){
-    this.setState({
-      renderPart: e.target.id,
     });
   }
   handleImageChange(e){
@@ -44,14 +33,14 @@ class Header extends Component{
     }
   }
   renderCurrentJob(){
-    const renderPart=this.state.renderPart;
+    const renderPart=this.props.renderPart;
     let currentJobSpan=(renderPart==='currentJob')?
                   (<input type='text' id='currentJob' value={this.state.currentJob} onChange={this.handleChange} onKeyDown={this.handleEnter}/>):
                   (<span id='currentJob' onClick={this.handleClick}>{this.state.currentJob}</span>);
     return currentJobSpan;
   }
   renderName(){
-    const renderPart=this.state.renderPart;
+    const renderPart=this.props.renderPart;
     let nameSpan=(renderPart==='name')?
                   (<input type='text' id='name' value={this.state.name} onChange={this.handleChange} onKeyDown={this.handleEnter}/>):
                   (<span id='name' onClick={this.handleClick}>{this.state.name}</span>);

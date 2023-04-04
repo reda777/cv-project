@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 class Skills extends Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state={
-      renderId: 0,
-      renderPart: 'default',
       rows: [{id:0, skillName: 'skill', skillRange: 5 }]
     };
-    this.handleClick=this.handleClick.bind(this);
+    this.handleClick=this.props.handleClick;
     this.handleChange=this.handleChange.bind(this);
-    this.handleEnter=this.handleEnter.bind(this);
+    this.handleEnter=this.props.handleEnter;
     this.handleAdd=this.handleAdd.bind(this);
   }
   handleAdd(){
@@ -35,29 +33,17 @@ class Skills extends Component{
       })
     }));
   }
-  handleEnter(e){
-    if(e.key==="Enter"){
-      this.setState({renderPart: 'default',})
-    }
-  }
-  handleClick(e){
-    console.log(e.target.className);
-    this.setState({
-      renderId: parseInt(e.target.parentNode.dataset.id),
-      renderPart: e.target.classList[0],
-    });
-  }
   renderSkillName(id){
-    const renderPart=this.state.renderPart;
-    const renderId=this.state.renderId;
+    const renderPart=this.props.renderPart;
+    const renderId=this.props.renderId;
     let skillNameDiv=(renderPart==='skillName' && renderId===id)?
                   (<input type='text' id='skillName' value={this.state.rows[id].skillName} onChange={this.handleChange} onKeyDown={this.handleEnter}/>):
                   (<div className='skillName' onClick={this.handleClick}>{this.state.rows[id].skillName}</div>);
     return skillNameDiv;
   }
   renderSkillRange(id){
-    const renderPart=this.state.renderPart;
-    const renderId=this.state.renderId;
+    const renderPart=this.props.renderPart;
+    const renderId=this.props.renderId;
     let skillRangeDiv=(renderPart==='skillRange' && renderId===id)?
                   (<input type="range" min="1" max="10" name="skillRange" id='skillRange' value={this.state.rows[id].skillRange} onChange={this.handleChange} onKeyDown={this.handleEnter}/>):
                   (<div data-id={id} className='skillRange' onClick={this.handleClick} ><div className='skillRange insideSkillRange' style={{width:7 * this.state.rows[id].skillRange+'px'}}></div></div>);
